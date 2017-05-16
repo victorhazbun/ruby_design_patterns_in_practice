@@ -561,7 +561,7 @@
   - Iterator helps you to iterate through a complex object using an iterator method.<sup>[[link](#iterator)]</sup>
 
   ```ruby
-  class Parent
+  class Ancestor
     attr_reader :first_name
 
     def initialize(first_name, gender)
@@ -570,21 +570,22 @@
     end
   end
 
-  class Child < Parent
+  class Child < Ancestor
   end
 
   class Family
+    attr_reader :father, :mother, :children
     def initialize(surname)
       @surname = surname
       @children = []
     end
 
     def add_father(first_name)
-      @father = Parent.new first_name, "M"
+      @father = Ancestor.new first_name, "M"
     end
 
     def add_mother(first_name)
-      @mother = Parent.new first_name, "F"
+      @mother = Ancestor.new first_name, "F"
     end
 
     def add_child(first_name, gender)
