@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["victor hazbun"]
   spec.email         = ["victorhazbun87@gmail.com"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
-  spec.homepage      = ""
+  spec.summary       = %q{GOF - Ruby Design Patterns}
+  spec.description   = %q{Ruby Design Patterns in practice with RSpec usage testing}
+  spec.homepage      = "https://victorhazbun.github.io/ruby_design_patterns_in_practice"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
