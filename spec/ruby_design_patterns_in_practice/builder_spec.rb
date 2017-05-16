@@ -1,13 +1,12 @@
 require "spec_helper"
 require "json"
 
-RSpec.describe RubyDesignPatternsInPractice::Builder do
+# Separate the construction of a complex object from its representation so that the same construction process can create different representations.
+RSpec.describe "Builder design pattern" do
 
   context "Usage" do
-    class TestKlass
-
-      attr_accessor :builder, :board
-
+    class TestBuilder
+      attr_reader :builder, :board
       def initialize(width, height)
         @builder = RubyDesignPatternsInPractice::Builder::BoardBuilder.new width, height
         @board = builder.board
@@ -24,9 +23,8 @@ RSpec.describe RubyDesignPatternsInPractice::Builder do
 
     context "Instance methods" do
       before do
-        @test_klass = TestKlass.new(10, 20)
+        @test_klass = TestBuilder.new(10, 20)
       end
-
       context "#initialize" do
         it "board must be of type Board" do
           expect(@test_klass.board).to be_kind_of(RubyDesignPatternsInPractice::Builder::Board)
@@ -41,20 +39,14 @@ RSpec.describe RubyDesignPatternsInPractice::Builder do
       end
 
       context "#add_tiles" do
-        before do
-          @test_klass.add_tiles(3)
-        end
         it "should update the board tiles size" do
-          expect(@test_klass.board.tiles.size).to eq(3)
+          expect { @test_klass.add_tiles(3) }.to change{ @test_klass.board.tiles.size }.from(0).to(3)
         end
       end
 
       context "#add_monsters" do
-        before do
-          @test_klass.add_monsters(4)
-        end
-        it "should update the board tiles size" do
-          expect(@test_klass.board.monsters.size).to eq(4)
+        it "should update the board monsters size" do
+          expect { @test_klass.add_monsters(4) }.to change{ @test_klass.board.monsters.size }.from(0).to(4)
         end
       end
 

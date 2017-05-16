@@ -1,13 +1,13 @@
 require "spec_helper"
 require "json"
 
-RSpec.describe RubyDesignPatternsInPractice::Adapter do
+# Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+
+RSpec.describe "Adapter design pattern" do
 
   context "Usage" do
-    class TestKlass
-
-      attr_accessor :hero, :quest
-
+    class TestAdapter
+      attr_reader :hero, :quest
       def initialize(difficulty)
         @difficulty = difficulty
         @hero = RubyDesignPatternsInPractice::Adapter::Hero.new
@@ -29,20 +29,17 @@ RSpec.describe RubyDesignPatternsInPractice::Adapter do
 
     context "Instance methods" do
       before do
-        @test_klass = TestKlass.new(5)
+        @test_klass = TestAdapter.new(5)
       end
-
       context "#complete_new_quest" do
         it "should update the hero exp" do
-          @test_klass.complete_new_quest
-          expect(@test_klass.hero.exp).to eq(250)
+          expect { @test_klass.complete_new_quest }.to change{ @test_klass.hero.exp }.from(0).to(250)
         end
       end
 
       context "#complete_old_quest" do
         it "should update the hero exp" do
-          @test_klass.complete_old_quest
-          expect(@test_klass.hero.exp).to eq(50)
+          expect { @test_klass.complete_old_quest }.to change{ @test_klass.hero.exp }.from(0).to(50)
         end
       end
     end
