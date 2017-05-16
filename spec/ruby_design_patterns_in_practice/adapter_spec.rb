@@ -3,7 +3,7 @@ require "json"
 
 RSpec.describe RubyDesignPatternsInPractice::Adapter do
 
-  context "Test implementation" do
+  context "Usage" do
     class TestKlass
 
       attr_accessor :hero, :quest
